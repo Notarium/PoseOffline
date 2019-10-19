@@ -1,0 +1,34 @@
+﻿<Window x:Class="PoseOffline.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PoseOffline"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Menu VerticalAlignment="Top">
+            <MenuItem Header="Analyse">
+                <MenuItem Header="Analyse" Click="Analyse_Click"/>
+                <MenuItem Header="DownloadPics" Click="DownloadPic_Click"/>
+                <MenuItem Header="Backup" Click="Backup_Click"/>
+                <MenuItem Header="Restore" Click="Restore_Click"/>
+            </MenuItem>
+            <MenuItem Header="Debug">
+                <MenuItem Header="PageCount" Click="MenuDebug_Click"></MenuItem>
+                <MenuItem Header="QueryCheck" Click="DebugQueryCheck_Click"></MenuItem>
+                <MenuItem Header="Update" Click="DebugUpdate_Click"></MenuItem>
+                <MenuItem Header="CleanDB" Click="CleanAll_Click"></MenuItem>
+                <MenuItem Header="UpdateIndex" Click="UpdateIndex_Click"></MenuItem>
+            </MenuItem>
+
+        </Menu>
+        <TextBox TextWrapping="WrapWithOverflow" Text="{Binding OutputString}" VerticalAlignment="Top" Margin="0,22,0,0" Height="259" VerticalScrollBarVisibility="Visible" IsReadOnly="True"></TextBox>
+        <StatusBar VerticalAlignment="Bottom" >
+            <StatusBarItem Content="{Binding StatusString}"></StatusBarItem>
+        </StatusBar>
+        <Button Content="Stop" HorizontalAlignment="Left" Margin="10,286,0,0" VerticalAlignment="Top" Height="23" Width="63" Click="Stop_Click"/>
+    </Grid>
+</Window>

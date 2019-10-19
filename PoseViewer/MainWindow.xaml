@@ -1,0 +1,115 @@
+﻿<Window x:Class="PoseViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PoseViewer"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="PoseViewer" Height="450" Width="800">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Browser">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TreeView x:Name="TagSelection" SelectedItemChanged="TreeView_SelectedItemChanged">
+                        <TreeViewItem Header="angle" Tag="collection">
+                            <TreeViewItem Header="h0" Tag="item"></TreeViewItem>
+                            <TreeViewItem Header="h135" Tag="item"></TreeViewItem>
+                            <TreeViewItem Header="h180" Tag="item"></TreeViewItem>
+                            <TreeViewItem Header="h45" Tag="item"></TreeViewItem>
+                            <TreeViewItem Header="h90" Tag="item"></TreeViewItem>
+                            <TreeViewItem Header="v0" Tag="item"></TreeViewItem>
+                            <TreeViewItem Header="v15" Tag="item"></TreeViewItem>
+                            <TreeViewItem Header="v30" Tag="item"></TreeViewItem>
+                            <TreeViewItem Header="v45" Tag="item"></TreeViewItem>
+                            <TreeViewItem Header="v60" Tag="item"></TreeViewItem>
+                            <TreeViewItem Header="vn15" Tag="item"></TreeViewItem>
+                            <TreeViewItem Header="vn30" Tag="item"></TreeViewItem>
+                            <TreeViewItem Header="vn45" Tag="item"></TreeViewItem>
+                            <TreeViewItem Header="vn60" Tag="item"></TreeViewItem>
+                        </TreeViewItem>
+                        <TreeViewItem Header="bodybuilding" Tag="item" />
+                        <TreeViewItem Header="etc" Tag="item" />
+                        <TreeViewItem Header="gender" Tag="collection">
+                            <TreeViewItem Header="child" Tag="item" />
+                            <TreeViewItem Header="female" Tag="item" />
+                            <TreeViewItem Header="male" Tag="item" />
+                            <TreeViewItem Header="male(freak)" Tag="item" />
+                        </TreeViewItem>
+                        <TreeViewItem Header="pose" Tag="collection">
+                            <TreeViewItem Header="dancing" Tag="item" />
+                            <TreeViewItem Header="fighting" Tag="item" />
+                            <TreeViewItem Header="floating" Tag="item" />
+                            <TreeViewItem Header="holding arms" Tag="item" />
+                            <TreeViewItem Header="kneeing" Tag="item" />
+                            <TreeViewItem Header="laying" Tag="item" />
+                            <TreeViewItem Header="running" Tag="item" />
+                            <TreeViewItem Header="shooting" Tag="item" />
+                            <TreeViewItem Header="sitting" Tag="item" />
+                            <TreeViewItem Header="stand" Tag="item" />
+                            <TreeViewItem Header="walking" Tag="item" />
+                        </TreeViewItem>
+                        <TreeViewItem Header="type" Tag="collection">
+                            <TreeViewItem Header="face" Tag="item" />
+                            <TreeViewItem Header="full" Tag="item" />
+                            <TreeViewItem Header="model" Tag="item" />
+                            <TreeViewItem Header="pair" Tag="item" />
+                        </TreeViewItem>
+                    </TreeView>
+                    <Label Visibility="Collapsed" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Content="{Binding ScrollValue}" Margin="5,0,5,0" />
+
+                    <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              ScrollViewer.ScrollChanged="ResultView_ScrollChanged"
+                              ItemsSource="{Binding QueriedCollection}"
+                              x:Name="ResultView" Grid.Column="1"
+
+                              SelectionChanged="ResultView_SelectionChanged" SelectionMode="Single">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel
+                                    Orientation="Horizontal" HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"></WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Path=PreviewImage}"
+                                       Width="100" Height="100"></Image>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Random">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <Button Height="30" Click="QuickDraw_Click" Width="Auto" Margin="2,5,2,5" IsEnabled="{Binding ButtonEnabled}">5</Button>
+                        <Button Height="30" Click="QuickDraw_Click" Width="Auto" Margin="2,5,2,5" IsEnabled="{Binding ButtonEnabled}">30</Button>
+                        <Button Height="30" Click="QuickDraw_Click" Width="Auto" Margin="2,5,2,5" IsEnabled="{Binding ButtonEnabled}">45</Button>
+                        <Button Height="30" Click="QuickDraw_Click" Width="Auto" Margin="2,5,2,5" IsEnabled="{Binding ButtonEnabled}">60</Button>
+                        <Button Height="30" Click="QuickDraw_Click" Width="Auto" Margin="2,5,2,5" IsEnabled="{Binding ButtonEnabled}">90</Button>
+                    </StackPanel>
+
+                    <Image Grid.Column="1" Source="{Binding RandomImage}">
+                    </Image>
+                    <TextBox IsReadOnly="True"
+                             Visibility="{Binding CounterVisibility}"
+                             Text="{Binding Counter}"
+                             FontSize="50"
+                             VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             Grid.ColumnSpan="2" Width="300" Height="200"></TextBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
